@@ -1,0 +1,6 @@
+com/gr63/atlantis/integration/UserDAO.class
+com/gr63/atlantis/model/UserBean.class
+com/gr63/atlantis/business/domain/User.class
+com/gr63/atlantis/business/logic/UserServiceLocal.class
+com/gr63/atlantis/business/logic/UserService.class
+com/gr63/atlantis/business/domain/User_.class
