@@ -50,6 +50,11 @@ public class UserBean implements Serializable {
         return "home";
     }
     
+    public boolean authentification(String guid)
+    {
+        return userService.authentification(guid) != null;
+    }
+    
     public String create(){
         System.out.println("User creation");
         

@@ -43,4 +43,20 @@ public class UserDAO {
         
         return user;
     }
+    
+    public User authentification(String guid)
+    {
+        Query query = em.createQuery("SELECT m FROM User m WHERE m.guid = '" + guid + "'");
+        
+        List<User> users = query.getResultList();
+        
+        if (users.size() == 1)
+        {
+            return users.get(0);
+        }
+        else
+        {
+            return null;
+        }
+    }
 }

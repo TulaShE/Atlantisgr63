@@ -9,13 +9,14 @@ import com.gr63.atlantis.business.domain.User;
 import com.gr63.atlantis.integration.UserDAO;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author dev
  */
-@Stateful
+@Stateless
 public class UserService implements UserServiceLocal {
 
     private User user = new User();
@@ -41,6 +42,12 @@ public class UserService implements UserServiceLocal {
     @Override
     public void getUserById(Long userId) {
         userDAO.getUserById(userId);
+    }
+    
+    @Override
+    public User authentification(String guid)
+    {
+        return userDAO.authentification(guid);
     }
 
     

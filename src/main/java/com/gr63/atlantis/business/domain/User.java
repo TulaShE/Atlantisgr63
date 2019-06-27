@@ -24,6 +24,8 @@ public class User {
     private String lastname;
     @Column(name="is_admin")
     private boolean isAdmin;
+    @Column(name="guid")
+    private String guid;
     
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(name = "userhasdevice",
@@ -62,6 +64,16 @@ public class User {
 
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
+    }
+    
+    public String getGuid()
+    {
+        return this.guid;
+    }
+    
+    public void setGuid(String guid)
+    {
+        this.guid = guid;
     }
 
     public List<Device> getUserDevices() {
