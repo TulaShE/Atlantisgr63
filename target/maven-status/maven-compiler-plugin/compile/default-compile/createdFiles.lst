@@ -1,13 +1,13 @@
 com/gr63/atlantis/business/logic/DeviceTypeServiceLocal.class
 com/gr63/atlantis/business/domain/DeviceType.class
 com/gr63/atlantis/business/logic/MetricService.class
-com/gr63/atlantis/model/UserBean.class
 com/gr63/atlantis/business/domain/User.class
+com/gr63/atlantis/model/UserBean.class
 com/gr63/atlantis/model/DeviceBean.class
 com/gr63/atlantis/business/domain/Device_.class
 com/gr63/atlantis/business/domain/DeviceType_.class
-com/gr63/atlantis/model/MetricBean.class
 com/gr63/atlantis/model/DeviceTypeBean.class
+com/gr63/atlantis/model/MetricBean.class
 com/gr63/atlantis/integration/DeviceDAO.class
 com/gr63/atlantis/business/logic/DeviceTypeService.class
 com/gr63/atlantis/integration/DeviceTypeDAO.class
@@ -19,6 +19,6 @@ com/gr63/atlantis/business/domain/Metric_.class
 com/gr63/atlantis/business/logic/UserService.class
 com/gr63/atlantis/business/logic/DeviceServiceLocal.class
 com/gr63/atlantis/business/domain/Metric.class
-com/gr63/atlantis/integration/MetricDAO.class
 com/gr63/atlantis/business/logic/MetricServiceLocal.class
+com/gr63/atlantis/integration/MetricDAO.class
 com/gr63/atlantis/business/domain/User_.class
