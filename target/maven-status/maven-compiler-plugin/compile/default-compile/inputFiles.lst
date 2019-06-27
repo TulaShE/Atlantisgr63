@@ -13,6 +13,7 @@
 /home/dev/javaprojects/Atlantis/src/main/java/com/gr63/atlantis/integration/DeviceDAO.java
 /home/dev/javaprojects/Atlantis/src/main/java/com/gr63/atlantis/business/logic/DeviceTypeService.java
 /home/dev/javaprojects/Atlantis/src/main/java/com/gr63/atlantis/model/DeviceBean.java
+/home/dev/javaprojects/Atlantis/src/main/java/com/gr63/atlantis/messageservice/Sender.java
 /home/dev/javaprojects/Atlantis/src/main/java/com/gr63/atlantis/integration/MetricDAO.java
 /home/dev/javaprojects/Atlantis/src/main/java/com/gr63/atlantis/business/logic/MetricServiceLocal.java
 /home/dev/javaprojects/Atlantis/src/main/java/com/gr63/atlantis/business/logic/DeviceService.java

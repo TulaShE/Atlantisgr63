@@ -6,6 +6,7 @@
 package com.gr63.atlantis.model;
 
 import com.gr63.atlantis.business.logic.UserServiceLocal;
+import com.gr63.atlantis.messageservice.Sender;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -26,6 +27,9 @@ public class UserBean implements Serializable {
 
     private boolean isAdmin;
     
+    Sender sender = new Sender();
+
+    
     @Inject
     private UserServiceLocal userService;
     /**
@@ -35,12 +39,14 @@ public class UserBean implements Serializable {
     }
     
     //redirect to authentification page
-    public String logIn(){
+    public String logIn() throws Exception{
         return "authentication";
     }
     
     //redirect to register page
-    public String register(){
+    public String register() throws Exception{
+        sender.send();
+        sender.receive();
         return "registration";
     }
     

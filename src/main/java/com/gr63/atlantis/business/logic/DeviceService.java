@@ -17,6 +17,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
+
 /**
  *
  * @author dev
@@ -32,7 +33,7 @@ public class DeviceService implements DeviceServiceLocal {
     
     @Inject
     UserDAO userDAO;
-
+    
     @Override
     public void addDevice(String name, String macAddres, Long deviceType) {
         device.setName(name);

@@ -5,8 +5,15 @@
  */
 package com.gr63.atlantis.business.logic;
 
+import com.gr63.atlantis.business.domain.Device;
+import com.gr63.atlantis.business.domain.Metric;
 import com.gr63.atlantis.business.domain.User;
+import com.gr63.atlantis.integration.DeviceDAO;
+import com.gr63.atlantis.integration.MetricDAO;
 import com.gr63.atlantis.integration.UserDAO;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.inject.Inject;
@@ -19,9 +26,17 @@ import javax.inject.Inject;
 public class UserService implements UserServiceLocal {
 
     private User user = new User();
+    private Metric metric = new Metric();
+    private Device device = new Device();
     
     @Inject
     UserDAO userDAO;
+    
+    @Inject
+    MetricDAO metricDAO;
+    
+    @Inject
+    DeviceDAO deviceDAO;
 
     @Override
     public void authentication(String firstname, String lastname) {
@@ -35,6 +50,18 @@ public class UserService implements UserServiceLocal {
         user.setFirstname(firstname);
         user.setLastname(lastname);
         userDAO.insert(user);
+        
+        DateFormat df = new SimpleDateFormat("dd/MM:yy HH:mm:ss");
+        Date dateMetric = new Date();
+        System.out.println(df.format(dateMetric));
+        
+        Long deviceLongId = new Long(1);
+        device = deviceDAO.getDeviceById(deviceLongId);        
+        
+        metric.setDate(dateMetric);
+        metric.setDeviceMetric(device);
+        metric.setValue("50");
+        metricDAO.insert(metric);
         System.out.println("Sauvegarde du user");
     }
 
