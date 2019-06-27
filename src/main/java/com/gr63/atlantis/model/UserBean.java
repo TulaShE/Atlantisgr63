@@ -22,6 +22,8 @@ import javax.servlet.http.HttpSession;
 public class UserBean implements Serializable {
 
     private String firstname, lastname;
+    private Long userId;
+
     private boolean isAdmin;
     
     @Inject
@@ -50,9 +52,7 @@ public class UserBean implements Serializable {
     
     public String create(){
         System.out.println("User creation");
-        //Check si user existe
-        //Si il existe connectUser
-        //Si il existe pas, creerUser
+        
         userService.save(firstname, lastname, false);
         
         HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
@@ -92,5 +92,13 @@ public class UserBean implements Serializable {
 
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
+    }
+    
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

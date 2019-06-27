@@ -5,7 +5,12 @@
  */
 package com.gr63.atlantis.integration;
 
+import com.gr63.atlantis.business.domain.Metric;
+import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -14,6 +19,19 @@ import javax.ejb.Stateless;
 @Stateless
 public class MetricDAO {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @PersistenceContext(unitName="atlantisPU")
+    private EntityManager em;
+    
+    public void insert(Metric metric){
+        em.persist(metric);
+    }
+    
+    public List<Metric> getMetricsByDevice(Long deviceId){
+        
+        Query query = em.createQuery("SELECT m FROM Metric m WHERE m.id = '" + deviceId + "'");
+        
+        List<Metric> deviceMetrics = query.getResultList();
+        
+        return deviceMetrics;
+    } 
 }

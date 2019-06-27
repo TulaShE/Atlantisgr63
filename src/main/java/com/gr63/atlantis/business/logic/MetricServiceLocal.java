@@ -5,6 +5,7 @@
  */
 package com.gr63.atlantis.business.logic;
 
+import com.gr63.atlantis.business.domain.Device;
 import com.gr63.atlantis.business.domain.Metric;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface MetricServiceLocal {
-    public void addMetric(Date date, String value, Long deviceId);
+    public void addMetric(Date date, String value, Device device);
     
     public List<Metric> getMetricsByDevice(Long deviceId);
 }

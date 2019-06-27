@@ -6,7 +6,12 @@
         <title>Regisration</title>
     </h:head>
     <h:body>
-        Register a new user
+        <h:form>
+            Lastname: <h:inputText id="lname" value="#{userModel.lastname}"/>
+            Firstname: <h:inputText id="fname" value="#{userModel.firstname}"/>
+            <br/>
+            <h:commandButton id="summary" value="Register" action="#{userModel.create}"/>
+        </h:form>
     </h:body>
 </html>
 

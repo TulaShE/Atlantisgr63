@@ -1,16 +1,17 @@
 package com.gr63.atlantis.business.domain;
 
-import java.util.List;
+import com.gr63.atlantis.business.domain.Device;
 import javax.annotation.Generated;
+import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-06-26T16:21:03")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-06-27T09:33:17")
 @StaticMetamodel(User.class)
 public class User_ { 
 
     public static volatile SingularAttribute<User, String> firstname;
-    public static volatile SingularAttribute<User, List> userDevices;
+    public static volatile ListAttribute<User, Device> userDevices;
     public static volatile SingularAttribute<User, Long> id;
     public static volatile SingularAttribute<User, Boolean> isAdmin;
     public static volatile SingularAttribute<User, String> lastname;

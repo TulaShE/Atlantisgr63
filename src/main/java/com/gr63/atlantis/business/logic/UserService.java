@@ -38,5 +38,10 @@ public class UserService implements UserServiceLocal {
         System.out.println("Sauvegarde du user");
     }
 
+    @Override
+    public void getUserById(Long userId) {
+        userDAO.getUserById(userId);
+    }
+
     
 }

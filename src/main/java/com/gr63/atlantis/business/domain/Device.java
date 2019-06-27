@@ -6,18 +6,32 @@
 package com.gr63.atlantis.business.domain;
 
 import java.util.List;
+import javax.persistence.*;
 
 /**
  *
  * @author dev
  */
+@Entity
+@Table(name="device")
 public class Device {
     
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String name;
-    private String mac_address;
-    private Long typeId;
+    
+    @Column(name = "mac_address")
+    private String macAddress;
+    
+    @JoinColumn(name = "id_type_device")
+    @ManyToOne
+    private DeviceType deviceType;
+    
+    @ManyToMany(mappedBy = "userDevices")
     private List<User> deviceUsers;
+    
+    @OneToMany(mappedBy = "deviceMetric", cascade = CascadeType.MERGE)
     private List<Metric> deviceMetrics;
 
     public Long getId(){
@@ -33,20 +47,13 @@ public class Device {
     }
 
     public String getMac_address() {
-        return mac_address;
+        return macAddress;
     }
 
-    public void setMac_address(String mac_address) {
-        this.mac_address = mac_address;
+    public void setMacAddress(String macAddress) {
+        this.macAddress = macAddress;
     }
 
-    public Long getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(Long typeId) {
-        this.typeId = typeId;
-    }
 
     public List<User> getDeviceUsers() {
         return deviceUsers;
@@ -63,4 +70,12 @@ public class Device {
     public void setDeviceMetrics(List<Metric> deviceMetrics) {
         this.deviceMetrics = deviceMetrics;
     }    
+
+    public DeviceType getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(DeviceType deviceType) {
+        this.deviceType = deviceType;
+    }
 }

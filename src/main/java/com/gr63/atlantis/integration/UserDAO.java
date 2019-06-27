@@ -37,4 +37,10 @@ public class UserDAO {
         
         return Users;
     }
+    
+    public User getUserById(Long userId){
+        User user = em.find(User.class, userId);
+        
+        return user;
+    }
 }

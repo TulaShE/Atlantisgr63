@@ -25,10 +25,19 @@ public class User {
     @Column(name="is_admin")
     private boolean isAdmin;
     
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @JoinTable(name = "userhasdevice",
+            joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_device")
+    )
     private List<Device> userDevices;
     
     public Long getId(){
         return id;
+    }
+    
+    public void setId(Long id){
+        this.id = id;
     }
     
     public void setFirstname(String firstname){

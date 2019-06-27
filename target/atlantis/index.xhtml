@@ -9,7 +9,9 @@
         <h:form>
             <h:commandButton id="register" value="Register" action="#{userModel.register}"/>
             <h:commandButton id="login" value="Login" action="#{userModel.logIn}"/>
+            User id: <h:inputText id="idUser" value="#{deviceModel.userId}"/>
+            Device id: <h:inputText id="idDevice" value="#{deviceModel.deviceId}"/>
+            <h:commandButton id="userDetail" value="Link" action="#{deviceModel.linkDeviceToUser}"/>
         </h:form>
     </h:body>
 </html>
-

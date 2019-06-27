@@ -15,13 +15,13 @@ import javax.ejb.Local;
  */
 @Local
 public interface DeviceServiceLocal {
-    public void addDevice(String macAddres, Long deviceType);
-    public void save();
+    public void addDevice(String name, String macAddres, Long deviceType);
+    public void save(String name, String macAddres, Long deviceType);
     
     public List<Device> getAllDevices();
     public List<Device> getDeviceByUser(Long userId);
-    public Device getDeviceById(Long deviceId);
+    public void getDeviceById(Long deviceId);
     
-    public void linkDeviceToUser(Long userId, Long deviceId);
+    public Device linkDeviceToUser(Long userId, Long deviceId);
     public void unlinkDeviceFromUser(Long userId, Long deviceId);
 }

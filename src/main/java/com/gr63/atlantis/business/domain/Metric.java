@@ -6,17 +6,23 @@
 package com.gr63.atlantis.business.domain;
 
 import java.util.Date;
-
+import javax.persistence.*;
 /**
  *
  * @author dev
  */
+@Entity
+@Table(name="metric")
 public class Metric {
     
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date date;
     private String value;
-    private Long idDevice;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_device")
+    private Device deviceMetric;
 
     public Long getId() {
         return id;
@@ -38,12 +44,12 @@ public class Metric {
         this.value = value;
     }
 
-    public Long getIdDevice() {
-        return idDevice;
+    public Device getDeviceMetric() {
+        return deviceMetric;
     }
 
-    public void setIdDevice(Long idDevice) {
-        this.idDevice = idDevice;
+    public void setDeviceMetric(Device deviceMetric) {
+        this.deviceMetric = deviceMetric;
     }
     
     

@@ -5,12 +5,16 @@
  */
 package com.gr63.atlantis.business.logic;
 
+import com.gr63.atlantis.business.domain.Device;
 import com.gr63.atlantis.business.domain.Metric;
 import com.gr63.atlantis.integration.MetricDAO;
 import java.util.Date;
 import java.util.List;
+import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,13 +29,20 @@ public class MetricService implements MetricServiceLocal {
     MetricDAO metricDAO;
 
     @Override
-    public void addMetric(Date date, String value, Long deviceId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Remove
+    public void addMetric(Date date, String value, Device device) {
+        metric.setDate(date);
+        metric.setValue(value);
+        metric.setDeviceMetric(device);
+        metricDAO.insert(metric);
+        System.out.println("Sauvegarde de la metric");
     }
 
     @Override
     public List<Metric> getMetricsByDevice(Long deviceId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Metric> deviceMetrics = metricDAO.getMetricsByDevice(deviceId);
+        System.out.println("Metrics listed");
+        return deviceMetrics;
     }
     
     

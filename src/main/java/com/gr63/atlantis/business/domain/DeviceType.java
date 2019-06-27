@@ -5,26 +5,35 @@
  */
 package com.gr63.atlantis.business.domain;
 
+import javax.persistence.*;
+
 /**
  *
  * @author dev
  */
+@Entity
+@Table(name="type_device")
 public class DeviceType {
     
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String typeName;
+    private String name;
     private String description;
 
     public Long getId() {
         return id;
     }
-
-    public String getTypeName() {
-        return typeName;
+    
+    public void setId(Long id){
+        this.id = id;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public String getTypeName() {
+        return name;
+    }
+
+    public void setTypeName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
