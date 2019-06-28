@@ -19,5 +19,6 @@ import javax.ejb.Local;
 public interface MetricServiceLocal {
     public void addMetric(Date date, String value, Device device);
     
-    public List<Metric> getMetricsByDevice(Long deviceId);
+    public List<Metric> getMetricsByDeviceSinceDate(Long deviceId, Date startDate);
+    public List<Metric> getAllMetrics();
 }

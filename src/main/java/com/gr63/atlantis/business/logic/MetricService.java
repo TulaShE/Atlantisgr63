@@ -8,6 +8,8 @@ package com.gr63.atlantis.business.logic;
 import com.gr63.atlantis.business.domain.Device;
 import com.gr63.atlantis.business.domain.Metric;
 import com.gr63.atlantis.integration.MetricDAO;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Remove;
@@ -39,10 +41,19 @@ public class MetricService implements MetricServiceLocal {
     }
 
     @Override
-    public List<Metric> getMetricsByDevice(Long deviceId) {
-        List<Metric> deviceMetrics = metricDAO.getMetricsByDevice(deviceId);
+    public List<Metric> getMetricsByDeviceSinceDate(Long deviceId, Date startDate) {
+        
+        List<Metric> deviceMetrics = metricDAO.getMetricsByDeviceBetweenDates(deviceId, startDate);
         System.out.println("Metrics listed");
+        
         return deviceMetrics;
+    }
+
+    @Override
+    public List<Metric> getAllMetrics() {
+        List<Metric> metrics = metricDAO.getAllMetrics();
+        
+        return metrics;
     }
     
     

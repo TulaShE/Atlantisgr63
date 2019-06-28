@@ -1,10 +1,15 @@
 package com.gr63.atlantis.messageservice;
 
 
+import com.gr63.atlantis.integration.MetricDAO;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
+import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.inject.Inject;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,8 +21,13 @@ import com.rabbitmq.client.DeliverCallback;
  *
  * @author dev
  */
+@Singleton
+@Startup
 public class Sender {
     private final static String QUEUE_NAME = "hello";
+    
+    private MetricDAO metricDAO;
+    
     public void send() throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setUsername("admin");
@@ -35,6 +45,7 @@ public class Sender {
             }
     }
     
+    
     public void receive() throws Exception{
         ConnectionFactory factory = new ConnectionFactory();
         factory.setUsername("admin");
@@ -50,8 +61,10 @@ public class Sender {
         
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(),"UTF-8");
+            
             System.out.println("Received : " + message);
         };
+        
         channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> { });
     }
 }

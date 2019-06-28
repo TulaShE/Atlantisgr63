@@ -1,6 +1,7 @@
 com/gr63/atlantis/business/logic/DeviceTypeServiceLocal.class
 com/gr63/atlantis/business/domain/DeviceType.class
 com/gr63/atlantis/business/logic/MetricService.class
+com/gr63/atlantis/message/MessageReceiver$1.class
 com/gr63/atlantis/model/UserBean.class
 com/gr63/atlantis/business/domain/User.class
 com/gr63/atlantis/model/DeviceBean.class
@@ -12,6 +13,7 @@ com/gr63/atlantis/messageservice/Sender.class
 com/gr63/atlantis/integration/DeviceDAO.class
 com/gr63/atlantis/business/logic/DeviceTypeService.class
 com/gr63/atlantis/integration/DeviceTypeDAO.class
+com/gr63/atlantis/message/MessageReceiver.class
 com/gr63/atlantis/integration/UserDAO.class
 com/gr63/atlantis/business/logic/UserServiceLocal.class
 com/gr63/atlantis/business/domain/Device.class

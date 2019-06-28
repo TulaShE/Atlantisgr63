@@ -40,13 +40,13 @@ public class UserBean implements Serializable {
     
     //redirect to authentification page
     public String logIn() throws Exception{
-        return "authentication";
+        //sender.send();
+        sender.receive();
+        return "index";
     }
     
     //redirect to register page
     public String register() throws Exception{
-        sender.send();
-        sender.receive();
         return "registration";
     }
     

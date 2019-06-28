@@ -12,6 +12,8 @@
             User id: <h:inputText id="idUser" value="#{deviceModel.userId}"/>
             Device id: <h:inputText id="idDevice" value="#{deviceModel.deviceId}"/>
             <h:commandButton id="userDetail" value="Link" action="#{deviceModel.linkDeviceToUser}"/>
+            <h:commandButton id="Metrics" value="Metrics" action="#{metricModel.listMetricsByDeviceSinceDate}"/>
+
         </h:form>
     </h:body>
 </html>
