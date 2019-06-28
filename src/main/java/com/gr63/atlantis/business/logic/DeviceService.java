@@ -27,6 +27,7 @@ public class DeviceService implements DeviceServiceLocal {
 
     private Device device = new Device();
     private DeviceType deviceType = new DeviceType();
+    private List<Device> listDevices;
     
     @Inject
     DeviceDAO deviceDAO;
@@ -55,12 +56,18 @@ public class DeviceService implements DeviceServiceLocal {
 
     @Override
     public List<Device> getAllDevices() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        listDevices = deviceDAO.getDevices();
+         return listDevices;
     }
 
     @Override
     public List<Device> getDeviceByUser(Long userId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+        User u = userDAO.getUserById(userId);
+        
+        List<Device> userDevices = u.getUserDevices();
+        
+        return userDevices;
     }
 
     @Override
@@ -72,7 +79,15 @@ public class DeviceService implements DeviceServiceLocal {
 
     @Override
     public void unlinkDeviceFromUser(Long userId, Long deviceId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        Device d;
+        d = deviceDAO.getDeviceById(deviceId);
+        
+        User u = userDAO.getUserById(userId);
+        
+        d.getDeviceUsers().remove(u);
+        u.getUserDevices().remove(d);
+        
     }
     
     @TransactionAttribute(TransactionAttributeType.REQUIRED)

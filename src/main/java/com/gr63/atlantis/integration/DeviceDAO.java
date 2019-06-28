@@ -27,7 +27,7 @@ public class DeviceDAO {
     }
     
     public List<Device> getDevices(){
-        Query query = em.createQuery("SELECT u FROM User u");
+        Query query = em.createQuery("SELECT d FROM Device d");
         
         List<Device> devices = query.getResultList();
         

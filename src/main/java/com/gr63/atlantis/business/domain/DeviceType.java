@@ -28,11 +28,11 @@ public class DeviceType {
         this.id = id;
     }
 
-    public String getTypeName() {
+    public String getName() {
         return name;
     }
 
-    public void setTypeName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
