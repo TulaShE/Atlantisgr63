@@ -1,12 +1,41 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Devices - Atlantis</title>
-    </h:head>
-    <h:body>
-        Devices
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+     <style>
+        table, td, th {  
+          border: 1px solid #ddd;
+          text-align: left;
+        }
+
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        th, td {
+          padding: 15px;
+        }
+    </style>
+    
+    <h:body>                           
+        <table><tr>
+                    <th>ID</th>
+                    <th>Mac Address</th>
+                    <th>Type device Name</th>
+                    <th>Name</th>
+                </tr>
+            <ui:repeat value="#{deviceModel.listDevices}" var="d">
+
+                 <tr>
+                         <td>#{d.id}</td>
+                         <td>#{d.macAddress}</td>
+                         <td>#{d.deviceType.name}</td>
+                         <td>#{d.name}</td>
+                 </tr>
+            </ui:repeat>
+         </table>
     </h:body>
 </html>
 

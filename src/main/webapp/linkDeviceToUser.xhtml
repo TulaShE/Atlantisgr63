@@ -1,12 +1,21 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Link Device/User - Atlantis</title>
-    </h:head>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
-        Link device to user
+        <h:form>
+            <h:selectOneMenu value = "#{deviceModel.userId}"> 
+                <f:selectItems value ="#{deviceModel.listUsers}" var="user" itemValue="#{user.id}" itemLabel="#{user.id} - #{user.firstname} #{user.lastname}"/>
+            </h:selectOneMenu> 
+            <h:selectOneMenu value = "#{deviceModel.deviceId}"> 
+                <f:selectItems value ="#{deviceModel.listDevices}" var="device" itemValue="#{device.id}" itemLabel="#{device.id} - #{device.name}"/> 
+            </h:selectOneMenu> 
+            
+            <h:outputText value="#{deviceModel.errorMessage}"></h:outputText>
+            
+            <h:commandButton id="userDetail" value="Link" action="#{deviceModel.linkDeviceToUser}"/>
+        </h:form>
     </h:body>
 </html>
 

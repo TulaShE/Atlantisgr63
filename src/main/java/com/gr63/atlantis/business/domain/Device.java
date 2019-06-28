@@ -46,13 +46,15 @@ public class Device {
         this.name = name;
     }
 
-    public String getMac_address() {
+    public String getMacAddress() {
         return macAddress;
     }
 
     public void setMacAddress(String macAddress) {
         this.macAddress = macAddress;
     }
+
+    
 
 
     public List<User> getDeviceUsers() {

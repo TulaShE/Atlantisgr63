@@ -5,11 +5,13 @@
  */
 package com.gr63.atlantis.model;
 
+import com.gr63.atlantis.business.domain.User;
 import com.gr63.atlantis.business.logic.UserServiceLocal;
 import com.gr63.atlantis.messageservice.Sender;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -26,12 +28,14 @@ public class UserBean implements Serializable {
     private Long userId;
 
     private boolean isAdmin;
+    private List<User> listUsers;
     
     Sender sender = new Sender();
 
     
     @Inject
     private UserServiceLocal userService;
+    private User user;
     /**
      * Creates a new instance of UserBean
      */
@@ -40,7 +44,7 @@ public class UserBean implements Serializable {
     
     //redirect to authentification page
     public String logIn() throws Exception{
-        return "authentication";
+        return "home";
     }
     
     //redirect to register page
@@ -68,6 +72,8 @@ public class UserBean implements Serializable {
     }
     
     public String listUsers(){
+        
+        listUsers = userService.getAllUser();
         return "usersList";
     }
     
@@ -107,4 +113,13 @@ public class UserBean implements Serializable {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+
+    public List<User> getListUsers() {
+        return listUsers;
+    }
+
+    public void setListUsers(List<User> listUsers) {
+        this.listUsers = listUsers;
+    }
+    
 }

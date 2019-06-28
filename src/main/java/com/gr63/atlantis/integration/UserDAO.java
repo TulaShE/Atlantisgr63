@@ -32,10 +32,11 @@ public class UserDAO {
     }
     
     public List<User> getAllUsers(){
+        Query query = em.createQuery("SELECT u FROM User u");
         
-        List<User> Users = null;
+        List<User> users = query.getResultList();
         
-        return Users;
+        return users;
     }
     
     public User getUserById(Long userId){

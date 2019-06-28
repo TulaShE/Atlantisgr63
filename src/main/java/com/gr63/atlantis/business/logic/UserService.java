@@ -14,6 +14,7 @@ import com.gr63.atlantis.integration.UserDAO;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.inject.Inject;
@@ -28,6 +29,7 @@ public class UserService implements UserServiceLocal {
     private User user = new User();
     private Metric metric = new Metric();
     private Device device = new Device();
+    private List<User> listUsers;
     
     @Inject
     UserDAO userDAO;
@@ -68,6 +70,13 @@ public class UserService implements UserServiceLocal {
     @Override
     public void getUserById(Long userId) {
         userDAO.getUserById(userId);
+    }
+
+    @Override
+    public List<User> getAllUser() {
+        listUsers = userDAO.getAllUsers();
+        
+        return listUsers;
     }
 
     

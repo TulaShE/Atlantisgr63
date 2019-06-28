@@ -1,20 +1,44 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Home - Atlantis</title>
-    </h:head>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <style>
+        .buttonCommand{
+            position: fixed;
+            width:250px;
+            height:35px;
+            transform: translate(-50%, -50%);
+        }
+        .devices{
+              top: 40%;
+              left: 40%;
+        }
+        .users{
+              top: 40%;
+              left: 60%;
+        }
+        .linkDeviceToUser{
+              top: 60%;
+              left: 40%;
+        }
+        .rmvDeviceFromUser{
+              top: 60%;
+              left: 60%;
+        }
+        .head{
+            top:50%;
+            left:50%;
+        }
+    </style>
     <h:body>
+        <h1 align="center">Home Page</h1>
         <h:form>
-            <h:commandButton id="devices" value="List Devices" action="#{deviceModel.listDevices}"/>
-            <br/>
-            <h:commandButton id="users" value="List Users" action="#{userModel.listUsers}"/>
-            <br/>
-            <h:commandButton id="linkDeviceToUser" value="Link Device To A User" action="#{deviceModel.linkDeviceToUser}"/>
-            <br/>
-            <h:commandButton id="rmvDeviceFromUser" value="Remove Device From A User" action="#{deviceModel.removeUserFromDevice}"/>
+            <h:commandButton id="devices"  styleClass="buttonCommand devices" value="List Devices" action="#{deviceModel.listDevices}"/>
+            <h:commandButton id="users" styleClass="buttonCommand users" value="List Users" action="#{userModel.listUsers}"/>
+            <h:commandButton id="linkDeviceToUser" styleClass="buttonCommand linkDeviceToUser" value="Link Device To A User" action="#{deviceModel.goToLinkDeviceToUser}"/>
+            <h:commandButton id="rmvDeviceFromUser" styleClass="buttonCommand rmvDeviceFromUser" value="Remove Device From A User" action="#{deviceModel.goToRemoveLinkDeviceToUser}"/>
         </h:form>
     </h:body>
 </html>
-
