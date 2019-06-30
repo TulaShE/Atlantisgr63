@@ -66,6 +66,10 @@ public class DeviceBean implements Serializable {
     }
     
     public String goToRemoveLinkDeviceToUser(){
+        if(userId != null)
+        {
+            listDevicesOfUser = deviceService.getDeviceByUser(userId);
+        }
         listUsers = userService.getAllUser();
         return "removeDeviceFromUser";
     }

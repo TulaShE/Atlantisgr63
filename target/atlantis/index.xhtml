@@ -18,14 +18,9 @@
         <h:form>
             <h:panelGrid styleClass="formClass">
                 <h:outputText value="Password" />
-                <h:inputSecret id="idUser" value="#{deviceModel.userId}"/>
+                <h:inputSecret id="password" value="#{deviceModel.userId}"/>
                 <h:commandButton id="login" value="Login" action="#{userModel.logIn}"/>
             </h:panelGrid>
-        </h:form>
-        <h:form>
-            User id: <h:inputText id="idUser2" value="#{deviceModel.userId}"/>
-            Device id: <h:inputText id="idDevice" value="#{deviceModel.deviceId}"/>
-            <h:commandButton id="userDetail" value="Link" action="#{deviceModel.linkDeviceToUser}"/>
         </h:form>
     </h:body>
 </html>
