@@ -58,7 +58,7 @@ public class User {
         return lastname;
     }
 
-    public boolean isIsAdmin() {
+    public boolean isAdmin() {
         return isAdmin;
     }
 

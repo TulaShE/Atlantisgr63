@@ -6,6 +6,7 @@
 package com.gr63.atlantis.business.logic;
 
 import com.gr63.atlantis.business.domain.User;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -15,7 +16,8 @@ import javax.ejb.Local;
 @Local
 public interface UserServiceLocal {
     public void authentication(String firstname, String lastname);
-    public User authentification(String guid);
-    public void save(String firstname, String lastname, boolean isAdmin);
+    public User getUserByGuid(String guid);
+    public void save(String firstname, String lastname, boolean isAdmin, String guid);
     public void getUserById(Long userId);
+    public List<User> getAllUser();
 }

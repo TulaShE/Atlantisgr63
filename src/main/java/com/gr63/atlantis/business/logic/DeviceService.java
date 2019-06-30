@@ -17,6 +17,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
+
 /**
  *
  * @author dev
@@ -26,13 +27,14 @@ public class DeviceService implements DeviceServiceLocal {
 
     private Device device = new Device();
     private DeviceType deviceType = new DeviceType();
+    private List<Device> listDevices;
     
     @Inject
     DeviceDAO deviceDAO;
     
     @Inject
     UserDAO userDAO;
-
+    
     @Override
     public void addDevice(String name, String macAddres, Long deviceType) {
         device.setName(name);
@@ -54,12 +56,13 @@ public class DeviceService implements DeviceServiceLocal {
 
     @Override
     public List<Device> getAllDevices() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        listDevices = deviceDAO.getDevices();
+         return listDevices;
     }
 
     @Override
     public List<Device> getDeviceByUser(Long userId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return deviceDAO.getUserDevices(userId);
     }
 
     @Override
@@ -71,7 +74,15 @@ public class DeviceService implements DeviceServiceLocal {
 
     @Override
     public void unlinkDeviceFromUser(Long userId, Long deviceId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        Device d;
+        d = deviceDAO.getDeviceById(deviceId);
+        
+        User u = userDAO.getUserById(userId);
+        
+        d.getDeviceUsers().remove(u);
+        u.getUserDevices().remove(d);
+        
     }
     
     @TransactionAttribute(TransactionAttributeType.REQUIRED)

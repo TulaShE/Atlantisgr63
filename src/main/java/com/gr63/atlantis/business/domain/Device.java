@@ -46,7 +46,7 @@ public class Device {
         this.name = name;
     }
 
-    public String getMac_address() {
+    public String getMacAddress() {
         return macAddress;
     }
 

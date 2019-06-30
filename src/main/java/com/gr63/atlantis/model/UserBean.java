@@ -5,10 +5,12 @@
  */
 package com.gr63.atlantis.model;
 
+import com.gr63.atlantis.business.domain.User;
 import com.gr63.atlantis.business.logic.UserServiceLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -23,24 +25,34 @@ public class UserBean implements Serializable {
 
     private String firstname, lastname;
     private Long userId;
+    private String guid;
 
     private boolean isAdmin;
+    private List<User> listUsers;
+    
+
     
     @Inject
     private UserServiceLocal userService;
+    private User user;
     /**
      * Creates a new instance of UserBean
      */
     public UserBean() {
     }
     
+    public User getUser(String guid)
+    {
+        return userService.getUserByGuid(guid);
+    }
+    
     //redirect to authentification page
-    public String logIn(){
-        return "authentication";
+    public String logIn() throws Exception{
+        return "home";
     }
     
     //redirect to register page
-    public String register(){
+    public String register() throws Exception{
         return "registration";
     }
     
@@ -50,23 +62,37 @@ public class UserBean implements Serializable {
         return "home";
     }
     
-    public boolean authentification(String guid)
+    public String getGuid()
     {
-        return userService.authentification(guid) != null;
+        return guid;
+
     }
     
-    public String create(){
+    public void setGuid(String guid)
+    {
+        this.guid = guid;
+    }
+    
+    public User authentificationByGuid(String guid)
+    {
+        return userService.getUserByGuid(guid);
+    }
+    
+    public void create(){
         System.out.println("User creation");
         
-        userService.save(firstname, lastname, false);
-        
+        userService.save(firstname, lastname, false, guid);
+        /*
         HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         session.invalidate();
+        // what is this ???
+        */
         
-        return "index";
     }
     
     public String listUsers(){
+        
+        listUsers = userService.getAllUser();
         return "usersList";
     }
     
@@ -91,7 +117,7 @@ public class UserBean implements Serializable {
         this.lastname = lastname;
     }
 
-    public boolean isIsAdmin() {
+    public boolean isAdmin() {
         return isAdmin;
     }
 
@@ -106,4 +132,13 @@ public class UserBean implements Serializable {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+
+    public List<User> getListUsers() {
+        return listUsers;
+    }
+
+    public void setListUsers(List<User> listUsers) {
+        this.listUsers = listUsers;
+    }
+    
 }

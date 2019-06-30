@@ -27,10 +27,17 @@ public class DeviceDAO {
     }
     
     public List<Device> getDevices(){
-        Query query = em.createQuery("SELECT u FROM User u");
+        Query query = em.createQuery("SELECT d FROM Device d");
         
         List<Device> devices = query.getResultList();
         
+        return devices;
+    }
+    
+    public List<Device> getUserDevices(Long userId){
+                
+        Query query = em.createNativeQuery("SELECT * FROM device WHERE device.id IN (SELECT userhasdevice.id_device FROM userhasdevice WHERE userhasdevice.id_user='"+userId+"');", Device.class);
+        List<Device> devices = query.getResultList();
         return devices;
     }
     

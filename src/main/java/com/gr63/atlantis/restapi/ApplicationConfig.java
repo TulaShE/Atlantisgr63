@@ -29,7 +29,10 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(com.gr63.atlantis.restapi.GenericResource.class);
+        resources.add(com.gr63.atlantis.restapi.ComplexMetrics.class);
+        resources.add(com.gr63.atlantis.restapi.GetDevices.class);
+        resources.add(com.gr63.atlantis.restapi.LastMetrics.class);
+        resources.add(com.gr63.atlantis.restapi.SendToken.class);
     }
     
 }

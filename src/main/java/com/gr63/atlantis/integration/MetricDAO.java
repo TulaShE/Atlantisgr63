@@ -28,7 +28,7 @@ public class MetricDAO {
     
     public List<Metric> getMetricsByDevice(Long deviceId){
         
-        Query query = em.createQuery("SELECT m FROM Metric m WHERE m.id = '" + deviceId + "'");
+        Query query = em.createNativeQuery("SELECT * FROM metric WHERE id_device='"+deviceId+"'", Metric.class);
         
         List<Metric> deviceMetrics = query.getResultList();
         

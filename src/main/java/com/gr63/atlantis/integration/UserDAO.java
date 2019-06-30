@@ -32,10 +32,11 @@ public class UserDAO {
     }
     
     public List<User> getAllUsers(){
+        Query query = em.createQuery("SELECT u FROM User u");
         
-        List<User> Users = null;
+        List<User> users = query.getResultList();
         
-        return Users;
+        return users;
     }
     
     public User getUserById(Long userId){
@@ -44,19 +45,12 @@ public class UserDAO {
         return user;
     }
     
-    public User authentification(String guid)
+    public User getUserByGuid(String guid)
     {
-        Query query = em.createQuery("SELECT m FROM User m WHERE m.guid = '" + guid + "'");
+        Query query = em.createNativeQuery("SELECT * FROM user WHERE guid='"+guid+"'", User.class);
         
-        List<User> users = query.getResultList();
+        Object user = query.getSingleResult();
         
-        if (users.size() == 1)
-        {
-            return users.get(0);
-        }
-        else
-        {
-            return null;
-        }
+        return (User) user;
     }
 }
