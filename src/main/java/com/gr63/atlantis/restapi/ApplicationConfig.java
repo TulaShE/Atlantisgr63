@@ -32,6 +32,7 @@ public class ApplicationConfig extends Application {
         resources.add(com.gr63.atlantis.restapi.ComplexMetrics.class);
         resources.add(com.gr63.atlantis.restapi.GetDevices.class);
         resources.add(com.gr63.atlantis.restapi.LastMetrics.class);
+        resources.add(com.gr63.atlantis.restapi.SendOrder.class);
         resources.add(com.gr63.atlantis.restapi.SendToken.class);
     }
     

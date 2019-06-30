@@ -47,13 +47,13 @@ public class UserService implements UserServiceLocal {
     }
 
     @Override
-    @Remove
     public void save(String firstname, String lastname, boolean isAdmin, String guid) {
         
         User testUser;
         testUser = getUserByGuid(guid);
         if (testUser != null)
         {
+            System.out.println("User alreday registered");
             return;
         }
         
@@ -61,18 +61,7 @@ public class UserService implements UserServiceLocal {
         user.setLastname(lastname);
         user.setGuid(guid);
         userDAO.insert(user);
-        
-        DateFormat df = new SimpleDateFormat("dd/MM:yy HH:mm:ss");
-        Date dateMetric = new Date();
-        System.out.println(df.format(dateMetric));
-        
-        Long deviceLongId = new Long(1);
-        device = deviceDAO.getDeviceById(deviceLongId);        
-        
-        metric.setDate(dateMetric);
-        metric.setDeviceMetric(device);
-        metric.setValue("50");
-        metricDAO.insert(metric);
+
         System.out.println("Sauvegarde du user");
     }
 

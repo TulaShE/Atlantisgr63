@@ -26,5 +26,6 @@ com/gr63/atlantis/business/domain/Metric.class
 com/gr63/atlantis/restapi/SendToken$1.class
 com/gr63/atlantis/business/logic/MetricServiceLocal.class
 com/gr63/atlantis/integration/MetricDAO.class
+com/gr63/atlantis/restapi/SendOrder.class
 com/gr63/atlantis/restapi/ApplicationConfig.class
 com/gr63/atlantis/business/domain/User_.class

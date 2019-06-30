@@ -5,61 +5,52 @@
  */
 package com.gr63.atlantis.restapi;
 
-import com.gr63.atlantis.model.MetricBean;
-import javax.ejb.Stateless;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.WebResource.Builder;
-import javax.inject.Inject;
+import javax.ejb.Stateless;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 /**
  *
  * @author root
  */
-
 @Stateless
-@Path("getcomplexmetrics")
-public class ComplexMetrics {
+@Path("sendorder")
+public class SendOrder {
+    public SendOrder() {
+        
+    }
     
     
     @Context
     private UriInfo context;
     
-
     
-    public ComplexMetrics()
-    {
-        
-    }
-    
-    @GET
-    @Path("/{deviceId}")
-    public Response getComplexData(@PathParam("deviceId") String deviceId)
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getComplexData(String body)
     {
         Client client = Client.create();
  
-        WebResource webResource = client.resource("http://jenkins.posier.fr:5000/api/calculation/averagedaily/"+deviceId);
+        WebResource webResource = client.resource("http://jenkins.posier.fr:5000/api/device/sendorder");
  
         
-        Builder builder = webResource.accept(MediaType.APPLICATION_JSON);
  
-        ClientResponse response = builder.get(ClientResponse.class);
+        ClientResponse response = webResource.type("application/json").post(ClientResponse.class, body);
  
         if (response.getStatus() != 200) {
             System.out.println("Failed : HTTP error code : " + response.getStatus());
             
             String error= response.getEntity(String.class);
             System.out.println("Error: "+error);
-            Response.status(Status.BAD_REQUEST).build();
+            Response.status(Response.Status.BAD_REQUEST).build();
         }
         
         String output = response.getEntity(String.class);

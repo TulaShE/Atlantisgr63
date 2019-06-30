@@ -134,7 +134,7 @@ public class SendToken {
             return Response.status(Status.NOT_FOUND).build();
         }
         
-        if (userBean == null)
+        if (userTmp == null)
         {
             return Response.status(Status.NOT_FOUND).build();
         }
