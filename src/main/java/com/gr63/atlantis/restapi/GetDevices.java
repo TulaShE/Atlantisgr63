@@ -51,7 +51,7 @@ public class GetDevices {
             devicesString += "{\"id\":"+device.getId()+",";
             devicesString += "\"mac_address\":\""+device.getMacAddress()+"\",";
             devicesString += "\"name\":\""+device.getName()+"\",";
-            devicesString += "\"deviceType\":"+device.getDeviceType().getId()+"},"; 
+            devicesString += "\"deviceType\":\""+device.getDeviceType().getTypeName()+"\"},"; 
         }
         devicesString = devicesString.substring(0, devicesString.length() - 1);
         devicesString += "]";

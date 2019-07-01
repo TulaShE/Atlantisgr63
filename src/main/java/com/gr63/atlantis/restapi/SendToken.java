@@ -95,9 +95,20 @@ public class SendToken {
         userBean.setLastname(userObject.getString("family_name"));
         
         userBean.create();
+        
+        User userTmp;
+        userTmp = userBean.authentificationByGuid(guid);
+        
+        if (userTmp == null)
+        {
+            return Response.status(Status.NOT_FOUND).build();
+        }
                 
         String json;
-        json = "{\"status\":\"User registered\"}";
+        json = "{\"user\": {"
+                + "\"id\":\""+userTmp.getId()+"\","
+                + "\"name\":\""+userTmp.getFirstname()+" "+userTmp.getLastname()+"\","
+                + "\"isAdmin\":\""+userTmp.isAdmin()+"\"}}";
         
         return Response.ok().entity(json).build();
     }
