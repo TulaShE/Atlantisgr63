@@ -49,13 +49,13 @@ public class UserService implements UserServiceLocal {
     @Override
     public void save(String firstname, String lastname, boolean isAdmin, String guid) {
         
-        User testUser;
-        testUser = getUserByGuid(guid);
-        if (testUser != null)
-        {
-            System.out.println("User alreday registered");
-            return;
-        }
+//        User testUser;
+//        testUser = getUserByGuid(guid);
+//        if (testUser != null)
+//        {
+//            System.out.println("User alreday registered");
+//            return;
+//        }
         
         user.setFirstname(firstname);
         user.setLastname(lastname);

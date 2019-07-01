@@ -55,12 +55,16 @@ public class LastMetrics {
         for (int i = 0; i < metrics.size(); i++) {
             Metric metric = (Metric) metrics.get(i);
             metricsString += "{\"id\":"+metric.getId()+",";
-            metricsString += "\"date\":\""+metric.getDate().toString()+"\",";
+            metricsString += "\"date\":"+metric.getDate().getTime()+",";
             metricsString += "\"value\":\""+metric.getValue()+"\"},";
         }
         metricsString = metricsString.substring(0, metricsString.length() - 1);
         metricsString += "]";
         
-        return Response.ok().entity(metricsString).build();
+        return Response.ok().entity(metricsString)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .allow("OPTIONS")
+                .build();
     }
 }

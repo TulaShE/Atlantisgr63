@@ -88,13 +88,35 @@ public class SendToken {
         JsonObject userObject = reader2.readObject();
         reader2.close();
         
-        String guid = userObject.getString("oid");
+        String guid = userObject.getString("oid");        
+        boolean isNewUser;
+        try {
+          isNewUser = userObject.getBoolean("newUser");
+        }
+        catch(Exception e){
+            isNewUser = false;
+        }
         
-        userBean.setGuid(guid);
-        userBean.setFirstname(userObject.getString("given_name"));
-        userBean.setLastname(userObject.getString("family_name"));
+        if (isNewUser)
+        {
+            
+            
+            User userTmp;
+            userTmp = userBean.authentificationByGuid(guid);
+
+            if (userTmp == null)
+            {
+
+                    userBean.setGuid(guid);
+                    userBean.setFirstname(userObject.getString("given_name"));
+                    userBean.setLastname(userObject.getString("family_name"));
+
+                    userBean.create();
+            }
+
         
-        userBean.create();
+            
+        }
         
         User userTmp;
         userTmp = userBean.authentificationByGuid(guid);
@@ -176,6 +198,10 @@ public class SendToken {
         json += devicesString;
         json += "}";
         
-        return Response.ok().entity(json).build();
+        return Response.ok().entity(json)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .allow("OPTIONS")
+                .build();
     }
 }

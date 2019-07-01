@@ -47,9 +47,18 @@ public class UserDAO {
     
     public User getUserByGuid(String guid)
     {
+        Object user;
+        try 
+        {
         Query query = em.createNativeQuery("SELECT * FROM user WHERE guid='"+guid+"'", User.class);
         
-        Object user = query.getSingleResult();
+        user = query.getSingleResult();
+            
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
         
         return (User) user;
     }

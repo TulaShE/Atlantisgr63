@@ -43,6 +43,12 @@ public class GetDevices {
     {
         List <Device> devices = deviceBean.getListDevicesOfUser(Long.valueOf(userId));
         
+        if (devices.size() == 0)
+        {
+            return Response.status(Response.Status.NO_CONTENT).build();
+            
+        }
+        
         String devicesString;
         devicesString = "[";
        
@@ -56,6 +62,11 @@ public class GetDevices {
         devicesString = devicesString.substring(0, devicesString.length() - 1);
         devicesString += "]";
         
-        return Response.ok().entity(devicesString).build();
+        return Response.ok()
+                .entity(devicesString)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .allow("OPTIONS")
+                .build();
     }
 }
