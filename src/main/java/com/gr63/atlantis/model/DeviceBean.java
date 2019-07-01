@@ -9,7 +9,6 @@ import com.gr63.atlantis.business.domain.Device;
 import com.gr63.atlantis.business.domain.User;
 import com.gr63.atlantis.business.logic.DeviceServiceLocal;
 import com.gr63.atlantis.business.logic.UserServiceLocal;
-import com.gr63.atlantis.messageservice.Sender;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
