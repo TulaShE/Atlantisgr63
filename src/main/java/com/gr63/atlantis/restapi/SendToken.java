@@ -62,84 +62,6 @@ public class SendToken {
         return "Hello";
     }
     
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response createUser(String body) {
-        
-        body = body.replaceAll("\r?\n", "");
-
-        Map<String, String> map = new Gson().fromJson(body, new TypeToken<Map<String, String>>(){}.getType());
-        
-        String token = map.get("token");
-        
-        String[] tokenInterestingPart = token.split("\\.");
-   
-        
-        if (tokenInterestingPart.length != 3)
-        {
-            return Response.status(Status.BAD_REQUEST).build();
-        }
-        byte[] tokenBytes = Base64.getDecoder().decode(tokenInterestingPart[1]);
-        String decodedToken = new String(tokenBytes);
-        
-        
-        JsonReader reader2 = Json.createReader(new StringReader(decodedToken));
-        JsonObject userObject = reader2.readObject();
-        reader2.close();
-        
-        String guid = userObject.getString("oid");        
-        boolean isNewUser;
-        try {
-          isNewUser = userObject.getBoolean("newUser");
-        }
-        catch(Exception e){
-            isNewUser = false;
-        }
-        
-        if (isNewUser)
-        {
-            
-            
-            User userTmp;
-            userTmp = userBean.authentificationByGuid(guid);
-
-            if (userTmp == null)
-            {
-
-                    userBean.setGuid(guid);
-                    userBean.setFirstname(userObject.getString("given_name"));
-                    userBean.setLastname(userObject.getString("family_name"));
-
-                    userBean.create();
-            }
-
-        
-            
-        }
-        
-        User userTmp;
-        userTmp = userBean.authentificationByGuid(guid);
-        
-        if (userTmp == null)
-        {
-            return Response.status(Status.NOT_FOUND).build();
-        }
-                
-        String json;
-        json = "{\"user\": {"
-                + "\"id\":\""+userTmp.getId()+"\","
-                + "\"name\":\""+userTmp.getFirstname()+" "+userTmp.getLastname()+"\","
-                + "\"isAdmin\":\""+userTmp.isAdmin()+"\"}}";
-        
-        return Response.ok().entity(json)
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "*")
-                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-                .allow("OPTIONS")
-                .build();
-    }
-    
     @GET
     @Path("/{token}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -160,7 +82,33 @@ public class SendToken {
         
         String guid = userObject.getString("oid");
         
-        System.out.println("Jeremzer guid: "+guid);
+        boolean isNewUser;
+        try {
+          isNewUser = userObject.getBoolean("newUser");
+        }
+        catch(Exception e){
+            isNewUser = false;
+        }
+        
+        if (isNewUser)
+        {
+            
+            
+            User userTmp;
+            userTmp = userBean.authentificationByGuid(guid);
+
+            if (userTmp == null)
+            {
+
+                userBean.setGuid(guid);
+                userBean.setFirstname(userObject.getString("given_name"));
+                userBean.setLastname(userObject.getString("family_name"));
+
+                userBean.create();
+            }
+            
+        }
+        
         User userTmp;
         
         try

@@ -10,8 +10,10 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -33,17 +35,18 @@ public class SendOrder {
     private UriInfo context;
     
     
-    @POST
+    @GET
+    @Path("/{state}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response getComplexData(String body)
+    public Response send_order(@PathParam("state") String state)
     {
         Client client = Client.create();
  
         WebResource webResource = client.resource("http://jenkins.posier.fr:5000/api/device/sendorder");
  
-        
+        String json = "{\"lightOn\":"+state+"}";
  
-        ClientResponse response = webResource.type("application/json").post(ClientResponse.class, body);
+        ClientResponse response = webResource.type("application/json").post(ClientResponse.class, json);
  
         if (response.getStatus() != 200) {
             System.out.println("Failed : HTTP error code : " + response.getStatus());
