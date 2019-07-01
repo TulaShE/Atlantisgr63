@@ -34,6 +34,13 @@ public class DeviceDAO {
         return devices;
     }
     
+    public List<Device> getUserDevices(Long userId){
+                
+        Query query = em.createNativeQuery("SELECT * FROM device WHERE device.id IN (SELECT userhasdevice.id_device FROM userhasdevice WHERE userhasdevice.id_user='"+userId+"');", Device.class);
+        List<Device> devices = query.getResultList();
+        return devices;
+    }
+    
     public Device getDeviceById(Long deviceId){
         Device device = em.find(Device.class, deviceId);
         

@@ -16,7 +16,8 @@ import javax.ejb.Local;
 @Local
 public interface UserServiceLocal {
     public void authentication(String firstname, String lastname);
-    public void save(String firstname, String lastname, boolean isAdmin);
+    public User getUserByGuid(String guid);
+    public void save(String firstname, String lastname, boolean isAdmin, String guid);
     public void getUserById(Long userId);
     public List<User> getAllUser();
 }

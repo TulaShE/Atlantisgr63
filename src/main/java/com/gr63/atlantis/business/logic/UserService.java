@@ -30,13 +30,13 @@ public class UserService implements UserServiceLocal {
     private Metric metric = new Metric();
     private Device device = new Device();
     private List<User> listUsers;
-    
+
     @Inject
     UserDAO userDAO;
-    
+
     @Inject
     MetricDAO metricDAO;
-    
+
     @Inject
     DeviceDAO deviceDAO;
 
@@ -47,23 +47,20 @@ public class UserService implements UserServiceLocal {
     }
 
     @Override
-    @Remove
-    public void save(String firstname, String lastname, boolean isAdmin) {
+    public void save(String firstname, String lastname, boolean isAdmin, String guid) {
+
+//        User testUser;
+//        testUser = getUserByGuid(guid);
+//        if (testUser != null)
+//        {
+//            System.out.println("User alreday registered");
+//            return;
+//        }
+
         user.setFirstname(firstname);
         user.setLastname(lastname);
+        user.setGuid(guid);
         userDAO.insert(user);
-        
-        DateFormat df = new SimpleDateFormat("dd/MM:yy HH:mm:ss");
-        Date dateMetric = new Date();
-        System.out.println(df.format(dateMetric));
-        
-        Long deviceLongId = new Long(1);
-        device = deviceDAO.getDeviceById(deviceLongId);        
-        
-        metric.setDate(dateMetric);
-        metric.setDeviceMetric(device);
-        metric.setValue("50");
-        metricDAO.insert(metric);
         System.out.println("Sauvegarde du user");
     }
 
@@ -73,11 +70,17 @@ public class UserService implements UserServiceLocal {
     }
 
     @Override
+    public User getUserByGuid(String guid)
+    {
+        return userDAO.getUserByGuid(guid);
+    }
+
+    @Override
     public List<User> getAllUser() {
         listUsers = userDAO.getAllUsers();
-        
+
         return listUsers;
     }
 
-    
+
 }

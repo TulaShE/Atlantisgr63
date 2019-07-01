@@ -25,10 +25,12 @@ public class UserBean implements Serializable {
 
     private String firstname, lastname;
     private Long userId;
+    private String guid;
 
     private boolean isAdmin;
     private List<User> listUsers;
-        
+
+
     @Inject
     private UserServiceLocal userService;
     private User user;
@@ -37,69 +39,91 @@ public class UserBean implements Serializable {
      */
     public UserBean() {
     }
-    
+
+    public User getUser(String guid)
+    {
+        return userService.getUserByGuid(guid);
+    }
+
     //redirect to authentification page
     public String logIn() throws Exception{
         return "home";
     }
-    
+
     //redirect to register page
     public String register() throws Exception{
         return "registration";
     }
-    
+
     //redirect to home page after authentification
     public String authentication(){
         userService.authentication(firstname, lastname);
         return "home";
     }
-    
-    public String create(){
+
+    public String getGuid()
+    {
+        return guid;
+
+    }
+
+    public void setGuid(String guid)
+    {
+        this.guid = guid;
+    }
+
+    public User authentificationByGuid(String guid)
+    {
+        return userService.getUserByGuid(guid);
+    }
+
+    public void create(){
         System.out.println("User creation");
-        
-        userService.save(firstname, lastname, false);
-        
+
+        userService.save(firstname, lastname, false, guid);
+        /*
         HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         session.invalidate();
-        
-        return "index";
+        // what is this ???
+        */
+
     }
-    
+
     public String listUsers(){
-        
+
         listUsers = userService.getAllUser();
         return "usersList";
     }
-    
+
     public String detailUser(){
         return "userDetails";
     }
-    
-    
+
+
     public String getFirstname(){
         return firstname;
     }
-    
+
     public void setFirstname(String firstname){
         this.firstname = firstname;
     }
-    
+
     public String getLastname(){
         return lastname;
     }
-    
+
     public void setLastname(String lastname){
         this.lastname = lastname;
     }
 
-    public boolean isIsAdmin() {
+    public boolean isAdmin() {
         return isAdmin;
     }
 
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
-    
+
     public Long getUserId() {
         return userId;
     }
@@ -115,5 +139,4 @@ public class UserBean implements Serializable {
     public void setListUsers(List<User> listUsers) {
         this.listUsers = listUsers;
     }
-    
 }

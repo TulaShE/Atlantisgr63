@@ -30,15 +30,15 @@ public class DeviceBean implements Serializable {
     private List<Device> listDevices;
     private List<User> listUsers;
     private List<Device> listDevicesOfUser;
-    
+
     private Device selectDevice;
     private String errorMessage;
-    
+
     @Inject
     DeviceServiceLocal deviceService;
     @Inject
     UserServiceLocal userService;
-        
+
     private Device device;
     private User user;
     /**
@@ -46,24 +46,24 @@ public class DeviceBean implements Serializable {
      */
     public DeviceBean() {
     }
-    
-    
+
+
     public String listDevices(){
         listDevices = deviceService.getAllDevices();
         return "devicesList";
     }
-    
+
     public String detailDevice(){
         return "deviceDetails";
     }
-    
+
     public String goToLinkDeviceToUser(){
         errorMessage = "";
         listUsers = userService.getAllUser();
         listDevices = deviceService.getAllDevices();
         return "linkDeviceToUser";
     }
-    
+
     public String goToRemoveLinkDeviceToUser(){
         if(userId != null)
         {
@@ -72,7 +72,7 @@ public class DeviceBean implements Serializable {
         listUsers = userService.getAllUser();
         return "removeDeviceFromUser";
     }
-    
+
     public String linkDeviceToUser(){
         try{
         deviceService.linkDeviceToUser(userId, deviceId);
@@ -83,23 +83,23 @@ public class DeviceBean implements Serializable {
         }
         return "linkDeviceToUser";
     }
-    
+
     public String removeUserFromDevice(){
         deviceService.unlinkDeviceFromUser(userId, deviceId);
         return "home";
     }
-    
+
     public String createDevice(){
         System.out.println("User creation");
-        
+
         deviceService.save(name, macAddress, deviceTypeId);
-        
+
         HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         session.invalidate();
-        
+
         return "index";
     }
-    
+
     public void changeOnUserUnlink(){
         listDevicesOfUser = deviceService.getDeviceByUser(userId);
     }
@@ -168,8 +168,8 @@ public class DeviceBean implements Serializable {
         this.listUsers = listUsers;
     }
 
-    public List<Device> getListDevicesOfUser() {
-        return listDevicesOfUser;
+    public List<Device> getListDevicesOfUser(Long userId) {
+        return deviceService.getDeviceByUser(userId);
     }
 
     public void setListDevicesOfUser(List<Device> listDevicesOfUser) {
@@ -183,7 +183,7 @@ public class DeviceBean implements Serializable {
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
-    
-    
-    
+
+
+
 }

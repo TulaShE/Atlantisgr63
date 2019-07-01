@@ -28,18 +28,18 @@ public class DeviceService implements DeviceServiceLocal {
     private Device device = new Device();
     private DeviceType deviceType = new DeviceType();
     private List<Device> listDevices;
-    
+
     @Inject
     DeviceDAO deviceDAO;
-    
+
     @Inject
     UserDAO userDAO;
-    
+
     @Override
     public void addDevice(String name, String macAddres, Long deviceType) {
         device.setName(name);
         device.setMacAddress(macAddres);
-        
+
         deviceDAO.insert(device);
     }
 
@@ -62,12 +62,7 @@ public class DeviceService implements DeviceServiceLocal {
 
     @Override
     public List<Device> getDeviceByUser(Long userId) {
-    
-        User u = userDAO.getUserById(userId);
-        
-        List<Device> userDevices = u.getUserDevices();
-        
-        return userDevices;
+        return deviceDAO.getUserDevices(userId);
     }
 
     @Override
@@ -75,25 +70,25 @@ public class DeviceService implements DeviceServiceLocal {
         deviceDAO.getDeviceById(deviceId);
     }
 
-    
+
 
     @Override
     public void unlinkDeviceFromUser(Long userId, Long deviceId) {
-        
+
         Device d;
         d = deviceDAO.getDeviceById(deviceId);
-        
+
         User u = userDAO.getUserById(userId);
-        
+
         d.getDeviceUsers().remove(u);
         u.getUserDevices().remove(d);
-        
+
     }
-    
+
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Device updateDevice(Device deviceToUpdate){
         device = deviceDAO.updateDevice(deviceToUpdate);
-        
+
         return device;
     }
 
@@ -101,12 +96,12 @@ public class DeviceService implements DeviceServiceLocal {
     public Device linkDeviceToUser(Long userId, Long deviceId) {
         Device d;
         d = deviceDAO.getDeviceById(deviceId);
-        
+
         User u = userDAO.getUserById(userId);
-        
+
         d.getDeviceUsers().add(u);
         u.getUserDevices().add(d);
-        
+
         return d;
     }
 }
