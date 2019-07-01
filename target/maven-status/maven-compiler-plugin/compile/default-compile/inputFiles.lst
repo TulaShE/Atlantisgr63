@@ -9,6 +9,7 @@
 /home/tulashe/javaProjects/Atlantisgr63/src/main/java/com/gr63/atlantis/business/domain/Device.java
 /home/tulashe/javaProjects/Atlantisgr63/src/main/java/com/gr63/atlantis/business/logic/MetricService.java
 /home/tulashe/javaProjects/Atlantisgr63/src/main/java/com/gr63/atlantis/restapi/GetDevices.java
+/home/tulashe/javaProjects/Atlantisgr63/src/main/java/com/gr63/atlantis/restapi/CORSFilter.java
 /home/tulashe/javaProjects/Atlantisgr63/src/main/java/com/gr63/atlantis/business/logic/MetricServiceLocal.java
 /home/tulashe/javaProjects/Atlantisgr63/src/main/java/com/gr63/atlantis/model/DeviceTypeBean.java
 /home/tulashe/javaProjects/Atlantisgr63/src/main/java/com/gr63/atlantis/integration/UserDAO.java

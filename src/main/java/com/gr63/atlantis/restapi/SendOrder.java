@@ -57,6 +57,7 @@ public class SendOrder {
         
         return Response.ok().entity(output)
                 .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "*")
                 .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
                 .allow("OPTIONS")
                 .build();

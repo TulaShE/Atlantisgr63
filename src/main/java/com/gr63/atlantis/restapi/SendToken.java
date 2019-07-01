@@ -132,7 +132,12 @@ public class SendToken {
                 + "\"name\":\""+userTmp.getFirstname()+" "+userTmp.getLastname()+"\","
                 + "\"isAdmin\":\""+userTmp.isAdmin()+"\"}}";
         
-        return Response.ok().entity(json).build();
+        return Response.ok().entity(json)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .allow("OPTIONS")
+                .build();
     }
     
     @GET
