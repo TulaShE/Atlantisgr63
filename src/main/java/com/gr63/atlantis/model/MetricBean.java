@@ -62,4 +62,9 @@ public class MetricBean implements Serializable {
     {
         return metricService.getMetricsByDevice(deviceId);
     }
+    
+    public void setValue()
+    {
+        
+    }
 }
