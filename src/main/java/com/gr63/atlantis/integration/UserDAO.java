@@ -5,6 +5,7 @@
  */
 package com.gr63.atlantis.integration;
 
+import com.gr63.atlantis.business.domain.Device;
 import com.gr63.atlantis.business.domain.User;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -61,5 +62,11 @@ public class UserDAO {
         }
         
         return (User) user;
+    }
+    
+    public List<Device> getDevices(Long userId) {
+        Query query = em.createNativeQuery("SELECT * FROM device WHERE device.id IN (SELECT userhasdevice.id_device FROM userhasdevice WHERE userhasdevice.id_user='"+userId+"');", Device.class);
+        List<Device> devices = query.getResultList();
+        return devices;
     }
 }

@@ -29,11 +29,10 @@ public class MetricService implements MetricServiceLocal {
     MetricDAO metricDAO;
 
     @Override
-    @Remove
     public void addMetric(Date date, String value, Device device) {
         metric.setDate(date);
         metric.setValue(value);
-        metric.setDeviceMetric(device);
+        metric.setDeviceId(device);
         metricDAO.insert(metric);
         System.out.println("Sauvegarde de la metric");
     }
@@ -43,7 +42,11 @@ public class MetricService implements MetricServiceLocal {
         List<Metric> deviceMetrics = metricDAO.getMetricsByDevice(deviceId);
         System.out.println("Metrics listed");
         return deviceMetrics;
+    }   
+
+    @Override
+    public void addMetric(String messageReceived) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
     
 }

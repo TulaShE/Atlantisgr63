@@ -7,10 +7,16 @@ package com.gr63.atlantis.restapi;
 
 import com.gr63.atlantis.business.domain.Metric;
 import com.gr63.atlantis.model.MetricBean;
+import java.io.StringReader;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -48,6 +54,15 @@ public class LastMetrics {
     public Response getLastMetrics(@PathParam("deviceId") String deviceId)
     {
         List<Metric> metrics = metricBean.getAllMetrics(Long.parseLong(deviceId));
+        
+        if (metrics.size() == 0)
+        {
+                    return Response.ok().entity("[]")
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .allow("OPTIONS")
+                .build();
+        }
         
         String metricsString;
         metricsString = "[";

@@ -65,8 +65,8 @@ public class UserService implements UserServiceLocal {
     }
 
     @Override
-    public void getUserById(Long userId) {
-        userDAO.getUserById(userId);
+    public User getUserById(Long userId) {
+        return userDAO.getUserById(userId);
     }
 
     @Override
@@ -82,5 +82,9 @@ public class UserService implements UserServiceLocal {
         return listUsers;
     }
 
-
+    @Override
+    public List<Device> getDevices(Long id)
+    {
+        return userDAO.getDevices(id);
+    }
 }

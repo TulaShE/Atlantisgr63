@@ -31,7 +31,7 @@ public class Device {
     @ManyToMany(mappedBy = "userDevices")
     private List<User> deviceUsers;
     
-    @OneToMany(mappedBy = "deviceMetric", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "deviceId", cascade = CascadeType.MERGE)
     private List<Metric> deviceMetrics;
 
     public Long getId(){

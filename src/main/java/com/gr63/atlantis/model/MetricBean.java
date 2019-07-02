@@ -5,6 +5,7 @@
  */
 package com.gr63.atlantis.model;
 
+import com.gr63.atlantis.business.domain.Device;
 import com.gr63.atlantis.business.domain.Metric;
 import com.gr63.atlantis.business.logic.MetricServiceLocal;
 import javax.inject.Named;
@@ -23,12 +24,10 @@ import javax.inject.Inject;
 public class MetricBean implements Serializable {
 
     private Long id;
-    private Long userId;
     private Date date;
     private String value;
     private String name;
 
-    private List<Metric> listMetrics;
     
     @Inject
     private MetricServiceLocal metricService;
@@ -63,8 +62,24 @@ public class MetricBean implements Serializable {
         return metricService.getMetricsByDevice(deviceId);
     }
     
-    public void setValue()
+    public void setValue(String value)
     {
-        
+        this.value = value;
     }
+    
+    public String getValue() {
+        return value;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    /*
+    public void storeMetric(String value, Date date, Device deviceId) {
+        metricService.addMetric(date, value, deviceId);
+    }*/
 }

@@ -22,7 +22,7 @@ public class Metric {
     
     @ManyToOne
     @JoinColumn(name = "id_device")
-    private Device deviceMetric;
+    private Device deviceId;
 
     public Long getId() {
         return id;
@@ -44,12 +44,12 @@ public class Metric {
         this.value = value;
     }
 
-    public Device getDeviceMetric() {
-        return deviceMetric;
+    public Device getDeviceId() {
+        return deviceId;
     }
 
-    public void setDeviceMetric(Device deviceMetric) {
-        this.deviceMetric = deviceMetric;
+    public void setDeviceId(Device deviceID) {
+        this.deviceId = deviceId;
     }
     
     

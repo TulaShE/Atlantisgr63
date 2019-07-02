@@ -7,6 +7,7 @@ package com.gr63.atlantis.restapi;
 
 import com.gr63.atlantis.business.domain.Device;
 import com.gr63.atlantis.model.DeviceBean;
+import com.gr63.atlantis.model.UserBean;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -31,7 +32,7 @@ public class GetDevices {
     private UriInfo context;
     
     @Inject
-    DeviceBean deviceBean;
+    UserBean userBean;
     
     public GetDevices(){
     }
@@ -41,13 +42,30 @@ public class GetDevices {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDevices(@PathParam("userId") String userId)
     {
-        List <Device> devices = deviceBean.getListDevicesOfUser(Long.valueOf(userId));
+        System.out.println(userId);
         
-        if (devices.size() == 0)
-        {
-            return Response.status(Response.Status.NO_CONTENT).build();
-            
+        List <Device> devices;
+        
+        try{
+            devices = userBean.getDevices(Long.valueOf(userId));
         }
+        catch(Exception e)
+        {
+            System.out.println(userBean);
+            return Response.status(Response.Status.NO_CONTENT).build();
+        }
+        
+        if (devices.size()==0)
+        {
+                    return Response.ok()
+                .entity("[]")
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .allow("OPTIONS")
+                .build();
+        }
+        
+        System.out.println("bono");
         
         String devicesString;
         devicesString = "[";
@@ -57,7 +75,7 @@ public class GetDevices {
             devicesString += "{\"id\":"+device.getId()+",";
             devicesString += "\"mac_address\":\""+device.getMacAddress()+"\",";
             devicesString += "\"name\":\""+device.getName()+"\",";
-            devicesString += "\"deviceType\":\""+device.getDeviceType().getTypeName()+"\"},"; 
+            devicesString += "\"deviceType\":\""+device.getDeviceType().getName()+"\"},"; 
         }
         devicesString = devicesString.substring(0, devicesString.length() - 1);
         devicesString += "]";

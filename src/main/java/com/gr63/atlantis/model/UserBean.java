@@ -5,6 +5,7 @@
  */
 package com.gr63.atlantis.model;
 
+import com.gr63.atlantis.business.domain.Device;
 import com.gr63.atlantis.business.domain.User;
 import com.gr63.atlantis.business.logic.UserServiceLocal;
 import javax.inject.Named;
@@ -14,6 +15,8 @@ import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+import java.security.*;
+import java.util.Arrays;
 
 /**
  *
@@ -26,7 +29,8 @@ public class UserBean implements Serializable {
     private String firstname, lastname;
     private Long userId;
     private String guid;
-
+    private String password;
+    private String errorMessage;
     private boolean isAdmin;
     private List<User> listUsers;
 
@@ -47,7 +51,20 @@ public class UserBean implements Serializable {
 
     //redirect to authentification page
     public String logIn() throws Exception{
-        return "home";
+        
+               
+        User admin = userService.getUserById(Long.valueOf("1"));
+        
+       if(password.hashCode() == admin.getPassword())
+         {
+           return "home";            
+         }
+       else
+         {
+                errorMessage = "The credentials are incorrect. Please retry.";
+         }
+        
+        return "index";
     }
 
     //redirect to register page
@@ -98,6 +115,11 @@ public class UserBean implements Serializable {
     public String detailUser(){
         return "userDetails";
     }
+    
+    public List<Device> getDevices(Long userId)
+    {
+        return userService.getDevices(userId);
+    }
 
 
     public String getFirstname(){
@@ -139,4 +161,22 @@ public class UserBean implements Serializable {
     public void setListUsers(List<User> listUsers) {
         this.listUsers = listUsers;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+    
+    
 }

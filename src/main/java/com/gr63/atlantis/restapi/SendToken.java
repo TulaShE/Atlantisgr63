@@ -125,7 +125,27 @@ public class SendToken {
             return Response.status(Status.NOT_FOUND).build();
         }
         
-        List<Device> devices = deviceBean.getListDevicesOfUser(Long.valueOf(userTmp.getId()));
+        List<Device> devices = deviceBean.deviceByUser(Long.valueOf(userTmp.getId()));
+        
+        if (devices.size()==0)
+        {
+                    
+        
+        String json = new String();
+        json = "{\"user\": {"
+                + "\"id\":\""+userTmp.getId()+"\","
+                + "\"name\":\""+userTmp.getFirstname()+" "+userTmp.getLastname()+"\","
+                + "\"isAdmin\":\""+userTmp.isAdmin()+"\"},";
+        
+        json += "\"device\":[]";
+        json += "}";
+        
+        return Response.ok().entity(json)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .allow("OPTIONS")
+                .build();
+        }
         
         String devicesString;
         devicesString = "\"devices\": [";
@@ -135,7 +155,7 @@ public class SendToken {
             devicesString += "{\"id\":"+device.getId()+",";
             devicesString += "\"mac_address\":\""+device.getMacAddress()+"\",";
             devicesString += "\"name\":\""+device.getName()+"\",";
-            devicesString += "\"deviceType\":\""+device.getDeviceType().getId()+"\"},"; 
+            devicesString += "\"deviceType\":\""+device.getDeviceType().getName()+"\"},"; 
         }
         // remove the last ','
         devicesString = devicesString.substring(0, devicesString.length() - 1);

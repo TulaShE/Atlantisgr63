@@ -26,6 +26,8 @@ public class User {
     private boolean isAdmin;
     @Column(name="guid")
     private String guid;
+    @Column(name="password")
+    private int password;
     
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(name = "userhasdevice",
@@ -83,4 +85,14 @@ public class User {
     public void setUserDevices(List<Device> userDevices) {
         this.userDevices = userDevices;
     }    
+
+    public int getPassword() {
+        return password;
+    }
+
+    public void setPassword(int password) {
+        this.password = password;
+    }
+    
+    
 }

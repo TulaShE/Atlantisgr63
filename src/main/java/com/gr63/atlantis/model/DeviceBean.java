@@ -72,6 +72,10 @@ public class DeviceBean implements Serializable {
         listUsers = userService.getAllUser();
         return "removeDeviceFromUser";
     }
+    
+    public List<Device> deviceByUser(long userId){
+        return deviceService.getDeviceByUser(userId);
+    }
 
     public String linkDeviceToUser(){
         try{
@@ -168,13 +172,14 @@ public class DeviceBean implements Serializable {
         this.listUsers = listUsers;
     }
 
-    public List<Device> getListDevicesOfUser(Long userId) {
-        return deviceService.getDeviceByUser(userId);
+    public List<Device> getListDevicesOfUser() {
+        return listDevicesOfUser;
     }
 
     public void setListDevicesOfUser(List<Device> listDevicesOfUser) {
         this.listDevicesOfUser = listDevicesOfUser;
     }
+
 
     public String getErrorMessage() {
         return errorMessage;
@@ -183,7 +188,4 @@ public class DeviceBean implements Serializable {
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
-
-
-
 }

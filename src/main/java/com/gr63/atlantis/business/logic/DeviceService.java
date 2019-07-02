@@ -13,6 +13,7 @@ import com.gr63.atlantis.integration.UserDAO;
 import java.util.List;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;

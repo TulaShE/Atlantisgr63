@@ -18,8 +18,9 @@
         <h:form>
             <h:panelGrid styleClass="formClass">
                 <h:outputText value="Password" />
-                <h:inputSecret id="password" value="#{deviceModel.userId}"/>
+                <h:inputSecret id="password" value="#{userModel.password}"/>
                 <h:commandButton id="login" value="Login" action="#{userModel.logIn}"/>
+                <h:outputText value="#{userModel.errorMessage}"></h:outputText>
             </h:panelGrid>
         </h:form>
     </h:body>
